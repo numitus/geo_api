@@ -1,0 +1,62 @@
+services:
+    mongo:
+        image: mongo:latest
+        volumes:
+            - ./mongo:/data/db
+        restart: always
+        ports:
+            - 27017:27017
+
+
+    rabbitmq:
+        image: rabbitmq:latest
+        restart: always
+        healthcheck:
+            test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
+            interval: 10s
+            timeout: 30s
+            retries: 3
+
+
+
+    geoapi-worker:
+        image: geoapi-server
+        build:
+            context: $PWD
+            dockerfile: Dockerfile
+        command: celery -A celeryapp.app worker -c 4 -l INFO
+        depends_on:
+            rabbitmq:
+              condition: service_healthy
+            mongo:
+              condition: service_started
+
+        links:
+            - rabbitmq
+            - mongo
+        env_file:
+            - $PWD/.env
+        restart: always
+
+
+    geoapi-server:
+        image: geoapi-server
+        build:
+            context: $PWD
+            dockerfile: Dockerfile
+        command: gunicorn -w 4 'backend:init_app()' -b 0.0.0.0:8080
+        ports:
+            - 8080:8080
+
+        depends_on:
+            mongo:
+              condition: service_started
+            rabbitmq:
+              condition: service_healthy
+
+        links:
+            - mongo
+            - rabbitmq
+        env_file:
+            - $PWD/.env
+        restart: always

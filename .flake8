@@ -1,0 +1,19 @@
+[flake8]
+#F-403 from xx import *' used; unable to detect undefined names
+# E203 Whitespace before ':'
+# W503 line break before binary operator
+# F405 Name may be undefined, or defined from star imports: module
+ignore =  F403, E203,  W503,F405
+max-line-length = 120
+max-complexity = 21
+select = B,C,E,F,W,T4,B9
+# T4 - any typing note. using flake8-mypy
+# B9 - flake8-bugbear warnings:
+#   B901: Using return x in a generator function
+#   B902: Invalid first argument used for method.
+#   B903: Use collections.namedtuple (or typing.NamedTuple) for data classes that only set attributes in an
+# B - flake8-bugbear
+# C - McCabe complexity
+# E - All E class violations are “errors” reported by pycodestyle
+# F class violations are reported by pyflakes
+# W class violations are “warnings” reported by pycodestyle
