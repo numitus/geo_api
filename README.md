@@ -19,7 +19,7 @@ curl \
 ```
 
 ```
-curl localhost:8080/api/getResult?task_id=3b7d7af8-5f42-4437-ad1b-219b0455f492
+curl localhost:8080/api/getResult?task_id=xxxxx
 ```
 
 ### Run tests
