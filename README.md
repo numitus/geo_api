@@ -1,7 +1,7 @@
 
 
 ### Run the application
-You need to set geocode_api key in .env file. You may use 
+You need to set geocode_api key in `.env` file. You may use 
 `geocode_api=662fd2bea5c75771485923hpq602dcb` for testing.
 Then run the following command to start the application.
 ```
