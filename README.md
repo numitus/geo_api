@@ -1,9 +1,9 @@
-
-
-### Run the application
+### Setup
 You need to copy `.env.dev` to `.env` and  set `geocode_api` key in `.env` file. You may use 
 `geocode_api=662fd2bea5c75771485923hpq602dcb` for testing.
-Then run the following command to start the application.
+
+### Run the application
+Execute the following command to start the application.
 ```
 docker-compose -f docker-compose.yml up --build
 ```
