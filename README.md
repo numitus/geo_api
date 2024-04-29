@@ -13,7 +13,6 @@ It will start the application on port 8080.
 #### Tests with curl
 ```
 curl \
-  -F "filecomment=This is an image file" \
   -F "test=@test.csv" \
   localhost:8080/api/calculateDistances
 ```
